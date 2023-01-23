@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: (LGPL-2.1 OR BSD-2-Clause)
 // Copyright (c) 2020 Anton Protopopov
-// https://github.com/iovisor/bcc/blob/master/libbpf-tools/maps.bpf.h
 #ifndef __MAPS_BPF_H
 #define __MAPS_BPF_H
 
-#include <bpf_helpers.h>
+#include <bpf/bpf_helpers.h>
 #include <asm-generic/errno.h>
 
 static __always_inline void *

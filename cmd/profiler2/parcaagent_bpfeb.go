@@ -13,6 +13,14 @@ import (
 	"github.com/cilium/ebpf"
 )
 
+type ParcaAgentStackCountKeyT struct {
+	Pid           uint32
+	UserStackId   int32
+	KernelStackId int32
+}
+
+type ParcaAgentStackTraceType [127]uint64
+
 // LoadParcaAgent returns the embedded CollectionSpec for ParcaAgent.
 func LoadParcaAgent() (*ebpf.CollectionSpec, error) {
 	reader := bytes.NewReader(_ParcaAgentBytes)
@@ -28,9 +36,9 @@ func LoadParcaAgent() (*ebpf.CollectionSpec, error) {
 //
 // The following types are suitable as obj argument:
 //
-//     *ParcaAgentObjects
-//     *ParcaAgentPrograms
-//     *ParcaAgentMaps
+//	*ParcaAgentObjects
+//	*ParcaAgentPrograms
+//	*ParcaAgentMaps
 //
 // See ebpf.CollectionSpec.LoadAndAssign documentation for details.
 func LoadParcaAgentObjects(obj interface{}, opts *ebpf.CollectionOptions) error {
@@ -118,5 +126,6 @@ func _ParcaAgentClose(closers ...io.Closer) error {
 }
 
 // Do not access this directly.
+//
 //go:embed parcaagent_bpfeb.o
 var _ParcaAgentBytes []byte
